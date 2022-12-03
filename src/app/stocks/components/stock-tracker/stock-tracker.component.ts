@@ -20,6 +20,7 @@ export class StockTrackerComponent implements OnInit {
 
   enableBtn: boolean = false;
   errorMsg: string;
+  isLoading: boolean = false;
 
   constructor(activatedRoute: ActivatedRoute, private router: Router, private fb: FormBuilder, private stackTrackerService: StockTrackerService) { }
 
@@ -38,13 +39,21 @@ export class StockTrackerComponent implements OnInit {
 
   trackStock(): void {
     let symbol: string = this.trackerForm.get('stockInput').value;
+    this.isLoading = true;
     forkJoin([this.stackTrackerService.getStockQuote(symbol), this.stackTrackerService.getCompanyProfile(symbol)])
       .subscribe((response) => {
+        this.isLoading = false;
         this.trackerForm.get('stockInput').setValue(null);
-        let stockQuote: StockInfo = response[0];
-        stockQuote.companyName = response[1]?.['name'];
-        this.addStockQuote.emit(stockQuote);
+        let companyName: string = response[1]?.['name'];
+        if (companyName) {
+          let stockQuote: StockInfo = response[0];
+          stockQuote.companyName = response[1]?.['name'];
+          this.addStockQuote.emit(stockQuote);
+        } else {
+          this.onErrorMsg.emit('Quote not found for symbol: ' + symbol);
+        }
       }, (error) => {
+        this.isLoading = false;
         this.onErrorMsg.emit(error.error);
       });
   }

@@ -12,12 +12,14 @@ import { DOWN_ARROW, UP_ARROW } from '../stock-home/stock-home.component';
 })
 export class StockSentimentComponent implements OnInit {
 
-  sentiments: StockSentiment[];
   private destroySubscriptions$ = new Subject();
+
+  sentiments: StockSentiment[];
   upIcon: string = UP_ARROW;
   downIcon: string = DOWN_ARROW;
   symbol: string;
   companyName: string;
+
   constructor(activatedRoute: ActivatedRoute, private router: Router, private stackTrackerService: StockTrackerService) {
 
     activatedRoute.params.pipe(takeUntil(this.destroySubscriptions$)).subscribe(params => {
@@ -33,7 +35,9 @@ export class StockSentimentComponent implements OnInit {
   getCompanyName(symbol: string) {
     this.stackTrackerService.getCompanyProfile(symbol)
       .subscribe((response) => {
-        this.companyName = response['name'];
+        if (response) {
+          this.companyName = response['name'];
+        }
       });
 
   }

@@ -22,6 +22,10 @@ export class LocalStorageService {
     localStorage.clear();
   }
 
+  /**
+   * get all the stock items from the local storage
+   * @returns list of all the stocks
+   */
   getAllStocks(): StockInfo[] {
     let stockList: StockInfo[] = [];
 

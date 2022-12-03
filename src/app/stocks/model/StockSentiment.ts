@@ -1,4 +1,6 @@
-
+/**
+ * Model to holds company Stock Sentiments
+ */
 export class StockSentiment {
     symbol: string;
     year: number;

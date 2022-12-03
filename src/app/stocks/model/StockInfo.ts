@@ -1,18 +1,20 @@
 
-
+/**
+ * Model to holds stock information
+ */
 export class StockInfo {
-    symbol?:string;
-    companyName?:string;
-	currentPrice: number;
+    symbol?: string;
+    companyName?: string;
+    currentPrice: number;
     changePrice: number;
     percentChange: number;
     highPriceOfDay: number;
     lowPriceOfDay: number;
     openPriceOfDay: number;
     prevClosePrice: number;
-    trending:number;     
+    trending: number;
 
-    constructor(body?:JSON) {
+    constructor(body?: JSON) {
         this.currentPrice = body['currentPrice'];
         this.changePrice = body['changePrice'];
         this.percentChange = body['percentChange'];
@@ -23,4 +25,3 @@ export class StockInfo {
         this.trending = body['trending'];
     }
 }
- 

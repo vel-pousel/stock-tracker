@@ -19,29 +19,20 @@
                             <div>
                                 MSPR: {{sentiment?.mspr}}
                             </div>
-
                         </div>
-                        <div class="col-1" *ngIf="sentiment?.change >=0; else showDownArrow" style="font-size: 35pt;
-                            COLOR: LAWNGREEN;">
+                        <div class="col-1 up-arrow" *ngIf="sentiment?.change >=0; else showDownArrow">
                             <span [innerHTML]="upIcon"></span>
                         </div>
                         <ng-template #showDownArrow>
-                            <div class="col-1" style="font-size: 35pt;
-                            COLOR: rgb(199, 23, 32);">
+                            <div class="col-1 down-arrow">
                                 <span [innerHTML]="downIcon"></span>
                             </div>
                         </ng-template>
                     </div>
                 </ng-container>
-
             </div>
-
-
-
         </div>
-
     </div>
-
 </div>
 <div class="card-container">
     <div class="col-7">

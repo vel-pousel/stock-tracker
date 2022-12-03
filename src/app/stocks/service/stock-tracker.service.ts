@@ -11,23 +11,23 @@ export class StockTrackerService {
 
   constructor(private http: HttpClient) { }
 
-  configUrl = "https://finnhub.io/api/v1/";
-  token = "&token=bu4f8kn48v6uehqi3cqg";
+  configUrl: string = "https://finnhub.io/api/v1/";
+  token: string = "&token=bu4f8kn48v6uehqi3cqg";
 
-  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  months: string[] = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 
-  //Search Company
-  searchCompany(search: string) {
-    return this.http.get(this.configUrl + "search?q=" + search + this.token);
-  }
-
-  // Company profile
+  /**
+   * 
+   * @param symbol get company profile the given symbol
+   * @returns company profile
+   */
   getCompanyProfile(symbol: string) {
     return this.http.get(
       this.configUrl + "stock/profile2?symbol=" + symbol + this.token
     );
   }
+
   /**
    * get company last three month sentiment details
    */
@@ -40,6 +40,11 @@ export class StockTrackerService {
     ).pipe(map(response => (this.buildSentiments(response['data']))));
   }
 
+  /**
+   * build sentiment model from json response
+   * @param responseList - input to be mapped  into model
+   * @returns - list sentiments
+   */
   buildSentiments(responseList): StockSentiment[] {
     let data: StockSentiment[] = []
 
@@ -56,7 +61,12 @@ export class StockTrackerService {
 
     return data;
   }
-  // Company quote
+
+  /**
+   * get quote for the given company symbol
+   * @param symbol 
+   * @returns 
+   */
   getStockQuote(symbol: string): Observable<StockInfo> {
     return this.http.get(
       this.configUrl + "quote?symbol=" + symbol + this.token
