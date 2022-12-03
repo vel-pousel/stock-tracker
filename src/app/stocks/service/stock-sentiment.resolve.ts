@@ -13,6 +13,5 @@ export class StockTrackerResolver implements Resolve<StockSentiment[]> {
     let symbol = route.params['symbol'] || route.parent.params['symbol'];
     return this.stockTrackerService.getCompanySentiment(symbol);
   }
-  //this.stackTrackerService.getCompanyProfile(symbol)
 }
 

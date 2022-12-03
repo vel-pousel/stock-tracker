@@ -33,7 +33,6 @@ export class StockTrackerComponent implements OnInit {
       } else {
         this.enableBtn = false;
       }
-
     })
   }
 

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { StockInfo } from '../../model/StockInfo';
 import { LocalStorageService } from '../../service/local-storage.service';
 
@@ -10,17 +10,19 @@ export const DOWN_ARROW: string = "\u{1F847}";
   templateUrl: './stock-home.component.html',
   styleUrls: ['./stock-home.component.scss']
 })
-export class StockHomeComponent implements OnInit {
+export class StockHomeComponent implements OnInit, OnDestroy {
 
   stockList: StockInfo[] = [];
   errorMsg: string;
+
   constructor(private localStorageService: LocalStorageService) { }
+
 
   ngOnInit(): void {
     this.loadStockList();
   }
 
-  addStockQuote(stockQuote: StockInfo) {
+  addStockQuote(stockQuote: StockInfo): void {
     this.localStorageService.setItem(stockQuote.symbol, JSON.stringify(stockQuote));
     this.loadStockList();
   }
@@ -28,13 +30,17 @@ export class StockHomeComponent implements OnInit {
     this.stockList = this.localStorageService.getAllStocks();
   }
 
-  removeStockQuote(stockQuote: StockInfo) {
+  removeStockQuote(stockQuote: StockInfo): void {
     this.localStorageService.removeItem(stockQuote.symbol);
     this.loadStockList();
   }
 
   onErrorMsg(error: string): void {
     this.errorMsg = error;
+  }
+
+  ngOnDestroy(): void {
+    this.localStorageService.clear();
   }
 
 }
