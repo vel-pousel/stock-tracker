@@ -1,0 +1,21 @@
+<div class="card-container">
+    <div class="sub-container">
+        <form (ngSubmit)="trackStock()" class="form-horizontal" [formGroup]="trackerForm">
+            <div class="card-title">Enter the symbol of a stock to track (i.e AAPL,TSLA,GOOGL)</div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-5">
+                        <input type="text" id="stockInput" class="form-control" aria-label="Stock Input" maxlength="5"
+                            formControlName="stockInput">
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" id="trackBtn" class=" btn-sm {{enableBtn?'btn-primary':'btn-default'}}"
+                            [disabled]="!enableBtn">
+                            Track Stock</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>

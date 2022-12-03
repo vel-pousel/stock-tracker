@@ -1,0 +1,13 @@
+<div class="container">
+    <div *ngIf="errorMsg" class="row">
+        <p class="text-danger"> {{errorMsg}} </p>
+    </div>
+    <div>
+        <stock-tracker (addStockQuote)="addStockQuote($event)" (onErrorMsg)="onErrorMsg($event)"></stock-tracker>
+    </div>
+    <div class="row">
+        <div class="cardComp col-6" *ngFor="let stockInfo of stockList">
+            <stock-details [stockInfo]="stockInfo" (removeStockQuote)="removeStockQuote($event)"></stock-details>
+        </div>
+    </div>
+</div>

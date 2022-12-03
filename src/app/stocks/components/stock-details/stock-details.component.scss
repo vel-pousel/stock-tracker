@@ -1,0 +1,20 @@
+.det-container{
+    border-radius: 4px;
+    border: 1px solid #eee;
+    background-color: #fafafa;
+    height: 250px;
+     width: 600px;
+    margin: 0 8px 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.2s ease-in-out;
+    line-height: 24px;
+  }
+  .btn-cl {
+    position: absolute;
+    right: 15px;
+    top: 15px;
+  }

@@ -1,0 +1,55 @@
+<div class="card-container" *ngIf="showStock">
+    <div class="det-container">
+        <div class="card-body">
+            <div class="row" style="justify-content: end">
+                <div class="close col-1 btn-cl" (click)="closeStockInfo()" id="remove{{stockInfo.symbol}}">x</div>
+            </div>
+
+            <div class="row card-title">
+                <div class="col-11">
+                    <h2 class="card-title">{{stockInfo?.companyName}} ({{stockInfo?.symbol}})</h2>
+                </div>
+            </div>
+
+            <div class="row form-group">
+                <div class="col-6">
+                    Change Today {{stockInfo?.percentChange | percent}}
+                </div>
+                <div class="col-5">
+                    Opening Price {{stockInfo?.openPriceOfDay | currency}}
+                </div>
+                <div class="col-1" *ngIf="stockInfo.percentChange >=0; else showDownArrow" style="font-size: 35pt;
+                    COLOR: LAWNGREEN;">
+                    <span [innerHTML]="upIcon"></span>
+                </div>
+                <ng-template #showDownArrow>
+                    <div class="col-1" style="font-size: 35pt;
+                    COLOR: rgb(199, 23, 32);">
+                        <span [innerHTML]="downIcon"></span>
+                    </div>
+
+                </ng-template>
+            </div>
+            <div class="row form-group">
+                <div class="col-6">
+                    Current Price {{stockInfo?.currentPrice | currency}}
+                </div>
+                <div class="col-6">
+                    High Price {{stockInfo?.highPriceOfDay | currency}}
+                </div>
+            </div>
+            <div class="row form-group">
+                <div class="col-8">
+                    <!-- <button type="button" id="sentiment{{stockInfo.symbol}}" (onclick)="goToSentiment()"> Go to social
+                        sentiment details
+                    </button> -->
+                    <a routerLink="/sentiment/{{stockInfo.symbol}}" id="sentiment{{stockInfo.symbol}}">Go to social
+                        sentiment details >> </a>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+</div>

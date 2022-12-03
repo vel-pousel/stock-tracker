@@ -1,0 +1,51 @@
+<div class="card-container">
+    <div class=" row sent-container">
+        <div class="card-body">
+            <div class="row card-title">
+                <div class="col-11">
+                    <h2 class="card-title">{{companyName}} ({{symbol}})</h2>
+                </div>
+            </div>
+            <div class="row form-group">
+                <ng-container *ngFor="let sentiment of sentiments">
+                    <div class="row col-4">
+                        <div class="form-group col-8">
+                            <div>
+                                {{sentiment?.monthName}}
+                            </div>
+                            <div>
+                                Change: {{sentiment?.change}}
+                            </div>
+                            <div>
+                                MSPR: {{sentiment?.mspr}}
+                            </div>
+
+                        </div>
+                        <div class="col-1" *ngIf="sentiment?.change >=0; else showDownArrow" style="font-size: 35pt;
+                            COLOR: LAWNGREEN;">
+                            <span [innerHTML]="upIcon"></span>
+                        </div>
+                        <ng-template #showDownArrow>
+                            <div class="col-1" style="font-size: 35pt;
+                            COLOR: rgb(199, 23, 32);">
+                                <span [innerHTML]="downIcon"></span>
+                            </div>
+                        </ng-template>
+                    </div>
+                </ng-container>
+
+            </div>
+
+
+
+        </div>
+
+    </div>
+
+</div>
+<div class="card-container">
+    <div class="col-6">
+        <a routerLink="/" id="backBtn">
+            << Back to list of stocks </a>
+    </div>
+</div>
